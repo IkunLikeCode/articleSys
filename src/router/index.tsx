@@ -31,7 +31,7 @@ function Router(routers: IRouterItem[]) {
 
 function RouterView() {
   return (
-    <Suspense>
+    <Suspense  fallback={<div>Loading...</div>}>
       <Routes>{Router(routes)}</Routes>
     </Suspense>
   );

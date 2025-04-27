@@ -48,6 +48,21 @@ function App() {
   useEffect(() => {
     restoringstate();
   }, [location.pathname]);
+
+  // 监听窗口的变化
+  useEffect(() => {
+    function handleResize() {
+      if (document.body.clientWidth > 1200) {
+        setIsinlineCollapsed(false);
+      } else {
+        setIsinlineCollapsed(true);
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Theme.Provider
       value={{ IsinlineCollapsed: IsinlineCollapsed, setIsinlineCollapsed }}>

@@ -34,7 +34,11 @@ import BookOut from "../pages/book";
 import InterviewOut from "../pages/interview";
 import AddInterview from "../pages/interview/addInterview";
 import AddUser from "../pages/user/addUser";
+import EditUser from "../pages/user/editUser";
 import Login from "../pages/login/login";
+import React from "react";
+import AddBook from "../pages/book/addBook";
+import EditBook from "../pages/book/editBook";
 const routes: IRouterItem[] = [
   {
     path: "/",
@@ -101,6 +105,12 @@ const routes: IRouterItem[] = [
             icon: <UserAddOutlined />,
           },
           {
+            path: "/user/editUser",
+            component: EditUser,
+            meta: { title: "编辑用户", isShow: false },
+            name: "editUser",
+          },
+          {
             path: "/user",
             component: () => <Navigate to="/user/userList" />,
           },
@@ -122,10 +132,16 @@ const routes: IRouterItem[] = [
           },
           {
             path: "/book/bookAdd",
-            component: Book,
+            component: AddBook,
             meta: { title: "添加书籍", isShow: true },
             name: "bookAdd",
             icon: <DiffOutlined />,
+          },
+          {
+            path: "/book/bookEdit",
+            component: EditBook,
+            meta: { title: "编辑书籍", isShow: false },
+            name: "bookEdit",
           },
           {
             path: "/book",
