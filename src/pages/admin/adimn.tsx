@@ -209,7 +209,10 @@ function Admin() {
               }}
               cancelText="取消"
               okText="确定">
-              <Button color="red" variant="link">
+              <Button
+                disabled={_id === adminInfo.data?._id}
+                color="red"
+                variant="link">
                 删除
               </Button>
             </Popconfirm>

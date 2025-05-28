@@ -1,0 +1,37 @@
+.articleDetail .bgBox {
+  position: relative;
+}
+.articleDetail .bgBox .bg {
+  width: 100%;
+  height: 573px;
+}
+.articleDetail .bgBox .mask {
+  width: 100%;
+  height: 573px;
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+}
+.articleDetail .bgBox .title {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  user-select: none;
+  width: 80%;
+}
+.articleDetail .content {
+  padding: 10px 0;
+}
+.articleDetail .content .inner {
+  font-size: 20px!important;
+  color: #333;
+  line-height: 50px;
+  text-indent: 2em;
+}

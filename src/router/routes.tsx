@@ -1,4 +1,5 @@
 import type { IRouterItem } from "./type";
+import { lazy } from "react";
 import {
   CommentOutlined,
   ContainerOutlined,
@@ -9,6 +10,7 @@ import {
   FileTextOutlined,
   HomeOutlined,
   HourglassOutlined,
+  MessageOutlined,
   SolutionOutlined,
   TeamOutlined,
   UserAddOutlined,
@@ -17,28 +19,9 @@ import {
   WalletOutlined,
 } from "@ant-design/icons";
 import Layout from "../layout";
-import Home from "../pages/home/home";
-import Admin from "../pages/admin/adimn";
 import NotFound from "../pages/notFound/notFound";
-import User from "../pages/user/user";
-import Interview from "../pages/interview/interview";
-import Issue from "../pages/issue/issue";
-import Types from "../pages/types/type";
-import Book from "../pages/book/book";
-import Comment from "../pages/comment/comment";
 import { Navigate } from "react-router";
-import AdminAdd from "../pages/admin/addAdmin";
-import AdminOutlet from "../pages/admin";
-import UserOut from "../pages/user";
-import BookOut from "../pages/book";
-import InterviewOut from "../pages/interview";
-import AddInterview from "../pages/interview/addInterview";
-import AddUser from "../pages/user/addUser";
-import EditUser from "../pages/user/editUser";
 import Login from "../pages/login/login";
-import React from "react";
-import AddBook from "../pages/book/addBook";
-import EditBook from "../pages/book/editBook";
 const routes: IRouterItem[] = [
   {
     path: "/",
@@ -52,27 +35,27 @@ const routes: IRouterItem[] = [
       {
         path: "/home",
         name: "home",
-        component: Home,
+        component: lazy(() => import("../pages/home/home")),
         meta: { title: "首页", isShow: true },
         icon: <HomeOutlined />,
       },
       {
         path: "/admin",
-        meta: { title: "管理员", isShow: true },
+        meta: { title: "管理员", isShow: true, isSuperAdmin: 1 },
         name: "admin",
         icon: <DesktopOutlined />,
-        component: AdminOutlet,
+        component: lazy(() => import("../pages/admin/index")),
         children: [
           {
             path: "/admin/adminList",
-            component: Admin,
+            component: lazy(() => import("../pages/admin/adimn")),
             meta: { title: "管理员列表", isShow: true },
             name: "adminList",
             icon: <TeamOutlined />,
           },
           {
             path: "/admin/adminAdd",
-            component: AdminAdd,
+            component: lazy(() => import("../pages/admin/addAdmin")),
             meta: { title: "添加管理员", isShow: true },
             name: "adminAdd",
             icon: <UsergroupAddOutlined />,
@@ -85,28 +68,28 @@ const routes: IRouterItem[] = [
       },
       {
         path: "/user",
-        component: UserOut,
+        component: lazy(() => import("../pages/user/index")),
         meta: { title: "用户", isShow: true },
         name: "user",
         icon: <UserOutlined />,
         children: [
           {
             path: "/user/userList",
-            component: User,
+            component: lazy(() => import("../pages/user/user")),
             meta: { title: "用户列表", isShow: true },
             name: "userList",
             icon: <TeamOutlined />,
           },
           {
             path: "/user/userAdd",
-            component: AddUser,
+            component: lazy(() => import("../pages/user/addUser")),
             meta: { title: "添加用户", isShow: true },
             name: "userAdd",
             icon: <UserAddOutlined />,
           },
           {
             path: "/user/editUser",
-            component: EditUser,
+            component: lazy(() => import("../pages/user/editUser")),
             meta: { title: "编辑用户", isShow: false },
             name: "editUser",
           },
@@ -118,28 +101,28 @@ const routes: IRouterItem[] = [
       },
       {
         path: "/book",
-        component: BookOut,
+        component: lazy(() => import("../pages/book/index")),
         meta: { title: "书籍", isShow: true },
         name: "book",
         icon: <WalletOutlined />,
         children: [
           {
             path: "/book/bookList",
-            component: Book,
+            component: lazy(() => import("../pages/book/book")),
             meta: { title: "书籍列表", isShow: true },
             name: "bookList",
             icon: <CopyOutlined />,
           },
           {
             path: "/book/bookAdd",
-            component: AddBook,
+            component: lazy(() => import("../pages/book/addBook")),
             meta: { title: "添加书籍", isShow: true },
             name: "bookAdd",
             icon: <DiffOutlined />,
           },
           {
             path: "/book/bookEdit",
-            component: EditBook,
+            component: lazy(() => import("../pages/book/editBook")),
             meta: { title: "编辑书籍", isShow: false },
             name: "bookEdit",
           },
@@ -151,24 +134,36 @@ const routes: IRouterItem[] = [
       },
       {
         path: "/interview",
-        component: InterviewOut,
+        component: lazy(() => import("../pages/interview/index")),
         meta: { title: "面试", isShow: true },
         name: "interview",
         icon: <SolutionOutlined />,
         children: [
           {
             path: "/interview/interviewList",
-            component: Interview,
+            component: lazy(() => import("../pages/interview/interview")),
             meta: { title: "面试列表", isShow: true },
             name: "interviewList",
             icon: <FileTextOutlined />,
           },
           {
             path: "/interview/interviewAdd",
-            component: AddInterview,
+            component: lazy(() => import("../pages/interview/addInterview")),
             meta: { title: "添加面试", isShow: true },
             name: "interviewAdd",
             icon: <FileAddOutlined />,
+          },
+          {
+            path: "/interview/interviewEdit",
+            component: lazy(() => import("../pages/interview/editInterview")),
+            meta: { title: "编辑面试", isShow: false },
+            name: "interviewEdit",
+          },
+          {
+            path: "/interview/interviewDetail/:interviewId",
+            component: lazy(() => import("../pages/interview/interviewDetail")),
+            meta: { title: "面试详情", isShow: false },
+            name: "interviewDetail",
           },
           {
             path: "/interview",
@@ -178,24 +173,40 @@ const routes: IRouterItem[] = [
       },
       {
         path: "/issue",
-        component: Issue,
+        component: lazy(() => import("../pages/issue/issue")),
         meta: { title: "问答", isShow: true },
         name: "issue",
         icon: <ContainerOutlined />,
       },
       {
         path: "/comment",
-        component: Comment,
+        component: lazy(() => import("../pages/comment/comment")),
         meta: { title: "评论", isShow: true },
         name: "comment",
         icon: <CommentOutlined />,
       },
       {
         path: "/types",
-        component: Types,
+        component: lazy(() => import("../pages/types/type")),
         meta: { title: "分类", isShow: true },
         name: "types",
         icon: <HourglassOutlined />,
+      },
+      {
+        path: "/chat",
+        component: lazy(() => import("../pages/article/article")),
+        meta: { title: "文章", isShow: true },
+        name: "chat",
+        icon: <MessageOutlined />,
+      },
+      {
+        path: "/articleDetail/:articleId",
+        component: lazy(() => import("../pages/article/articleDetail")),
+        meta: {
+          title: "文章详情",
+          isShow: false,
+        },
+        name: "articleDetail",
       },
       {
         path: "*",

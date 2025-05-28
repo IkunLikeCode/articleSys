@@ -7,10 +7,10 @@ import { Provider } from "react-redux";
 import { HashRouter } from "react-router";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <HashRouter>
-      <Provider store={store}>
+    <Provider store={store}>
+      <HashRouter>
         <App />
-      </Provider>
-    </HashRouter>
+      </HashRouter>
+    </Provider>
   </StrictMode>
 );

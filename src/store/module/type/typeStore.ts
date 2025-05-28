@@ -4,7 +4,7 @@ import type { TypeStates } from "./type";
 
 export const getTypeList = createAsyncThunk(
   "getTypeList",
-  async (state, thunkApi) => {
+  async (_state, thunkApi) => {
     try {
       const res = await Request.request<TypeStates["typeList"]>({
         url: "/api/type",
@@ -16,6 +16,25 @@ export const getTypeList = createAsyncThunk(
     }
   }
 );
+
+export const deleteType = createAsyncThunk("deleteType", async (id: string) => {
+  const res = await Request.request({
+    url: `/api/type/${id}`,
+    method: "delete",
+  });
+  return res;
+});
+
+export const addType = createAsyncThunk("addType", async (type: string) => {
+  const res = await Request.request({
+    url: "/api/type",
+    method: "post",
+    data: {
+      typeName: type,
+    },
+  });
+  return res;
+});
 
 const initialState: TypeStates = {
   typeList: {

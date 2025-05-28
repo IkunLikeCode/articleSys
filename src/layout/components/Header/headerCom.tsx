@@ -1,5 +1,5 @@
 import "./header.less";
-import { Avatar, Dropdown, MenuProps } from "antd";
+import { Avatar, ColorPicker, Dropdown, MenuProps } from "antd";
 import Theme from "../../../util/theme";
 import { useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -21,7 +21,8 @@ function HeaderCom() {
   const {
     adminInfo: { data },
   } = useSelector((state: rootReducer) => state.admin);
-  const { IsinlineCollapsed, setIsinlineCollapsed } = useContext(Theme);
+  const { IsinlineCollapsed, setIsinlineCollapsed, setPrimary, primary } =
+    useContext(Theme);
 
   // 菜单
   const items: MenuProps["items"] = [
@@ -62,7 +63,7 @@ function HeaderCom() {
   }
   // 关闭头部菜单
   function closePathTitle(index: number) {
-    const newPathArr = pathArr.filter((item: menuItem, i: number) => {
+    const newPathArr = pathArr.filter((i: number) => {
       return i !== index;
     });
     sessionStorage.setItem(
@@ -107,6 +108,14 @@ function HeaderCom() {
         </div>
       </div>
       <div className="avatar">
+        <ColorPicker
+          value={primary}
+          onChange={(color) => {
+            setPrimary(color.toHexString());
+          }}
+          style={{
+            marginRight: 20,
+          }}></ColorPicker>
         <Dropdown menu={{ items }} placement="bottom">
           <Avatar src={data.avatar}></Avatar>
         </Dropdown>

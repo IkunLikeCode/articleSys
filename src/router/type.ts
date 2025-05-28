@@ -1,12 +1,13 @@
-import React from "react";
-export interface IRouterItem{
-    path:string,
-    component?:React.FC |Element | null,
-    children?:IRouterItem[],
-    meta?:{
-        title:string,
-        isShow?:boolean
-    },
-    name?:string,
-    icon?:React.ReactNode
+import React, { ElementType } from "react";
+export interface IRouterItem {
+  path: string;
+  component: ElementType;
+  children?: IRouterItem[];
+  meta?: {
+    title: string;
+    isShow?: boolean;
+    isSuperAdmin?: number;
+  };
+  name?: string;
+  icon?: React.ReactNode;
 }

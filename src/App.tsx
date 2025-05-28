@@ -3,7 +3,7 @@ import Theme from "./util/theme";
 import RouterView from "./router";
 import getRestoringState from "./api/restoringstate";
 import type { ReqeustState } from "../types/commonType";
-import { message } from "antd";
+import { ConfigProvider, message } from "antd";
 import { useNavigate, useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 import { setAdminInfo } from "./store/module/admin/admin";
@@ -11,6 +11,7 @@ import { AppDispatch } from "./store";
 import { getAdminInfo } from "./api/admin";
 import { AdminPersonalInfo } from "./store/module/admin/type";
 function App() {
+  const [primary, setPrimary] = useState("#1677ff");
   const [IsinlineCollapsed, setIsinlineCollapsed] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -65,8 +66,20 @@ function App() {
   }, []);
   return (
     <Theme.Provider
-      value={{ IsinlineCollapsed: IsinlineCollapsed, setIsinlineCollapsed }}>
-      <RouterView></RouterView>
+      value={{
+        IsinlineCollapsed: IsinlineCollapsed,
+        setIsinlineCollapsed,
+        setPrimary,
+        primary,
+      }}>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: primary,
+          },
+        }}>
+        <RouterView></RouterView>
+      </ConfigProvider>
     </Theme.Provider>
   );
 }

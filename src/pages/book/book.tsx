@@ -58,7 +58,7 @@ function Bok() {
       title: "序号",
       key: "index",
       align: "center",
-      render: (_, record, index) => {
+      render: (_, _record, index) => {
         return index + 1;
       },
     },

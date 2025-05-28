@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getUserList, deleteUser, updateUser } from "../../api/user";
 import { userListType, UserItem, userInfo } from "./type";
-import "./user.less";
 import {
   Avatar,
   Button,
@@ -15,6 +14,8 @@ import {
 } from "antd";
 import type { TableProps } from "antd";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import { rootReducer } from "../../store/type";
 interface pageInfoType {
   current: number;
   pageSize: number;
@@ -115,6 +116,8 @@ function User() {
     pageSize: 6,
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // 获取当前管理员信息
+  const { adminInfo } = useSelector((state: rootReducer) => state.admin);
   // 当前用户信息
   const [currentUser] = useState<userInfo>({
     avatar: "",
@@ -204,7 +207,7 @@ function User() {
       title: "序号",
       key: "_id",
       align: "center",
-      render: (_, record, index) => {
+      render: (_, _record, index) => {
         return index + 1;
       },
     },
@@ -260,15 +263,17 @@ function User() {
             <Button type="link" onClick={() => editUser(row)}>
               编辑
             </Button>
-            <Popconfirm
-              title="你确定要删除吗?"
-              cancelText="取消"
-              okText="确定"
-              onConfirm={() => deleteUserItem(row)}>
-              <Button color="red" variant="link">
-                删除
-              </Button>
-            </Popconfirm>
+            {adminInfo.data.permission === 1 ? (
+              <Popconfirm
+                title="你确定要删除吗?"
+                cancelText="取消"
+                okText="确定"
+                onConfirm={() => deleteUserItem(row)}>
+                <Button color="red" variant="link">
+                  删除
+                </Button>
+              </Popconfirm>
+            ) : null}
           </>
         );
       },

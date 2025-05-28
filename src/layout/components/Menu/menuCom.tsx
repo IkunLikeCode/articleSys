@@ -6,9 +6,6 @@ import Theme from "../../../util/theme";
 import routes from "../../../router/routes";
 import { useMemo } from "react";
 import { useNavigate, useLocation } from "react-router";
-// import { useDispatch } from "react-redux";
-// import { AppDispatch } from "../../../store";
-// import { setPathArr } from "../../../store/module/public/public";
 
 function MenuCom() {
   // const dispatch = useDispatch<AppDispatch>();
@@ -23,13 +20,6 @@ function MenuCom() {
   const onClickHandle: MenuProps["onClick"] = (e) => {
     // 获取当前点击的菜单项的key和label
     if (e.key) {
-      // dispatch(
-      //   setPathArr({
-      //     pathName: e.key,
-      //     pathTitle: (e.domEvent.target as any).innerHTML,
-      //   })
-      // );
-      // 路由跳转
       navigate(e.key);
     }
   };

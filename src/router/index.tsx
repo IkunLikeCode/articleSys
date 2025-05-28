@@ -13,7 +13,7 @@ const MyShowRouter = (props: { route: IRouterItem }) => {
     }, 0);
   }, [props.route.path]);
   const Component = props.route.component;
-  return Component && typeof Component === "function" ? <Component /> : null;
+  return <Component />;
 };
 
 function Router(routers: IRouterItem[]) {
@@ -31,7 +31,7 @@ function Router(routers: IRouterItem[]) {
 
 function RouterView() {
   return (
-    <Suspense  fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div></div>}>
       <Routes>{Router(routes)}</Routes>
     </Suspense>
   );
