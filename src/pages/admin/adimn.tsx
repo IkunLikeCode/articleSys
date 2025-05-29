@@ -197,25 +197,28 @@ function Admin() {
         return (
           <>
             <Button
+              disabled={!(adminInfo.data.permission === row.permission)}
               onClick={() => editHandle(row)}
               color="primary"
               variant="link">
               编辑
             </Button>
-            <Popconfirm
-              title="确定要删除吗？"
-              onConfirm={() => {
-                deleteAdminAsync(_id);
-              }}
-              cancelText="取消"
-              okText="确定">
-              <Button
-                disabled={_id === adminInfo.data?._id}
-                color="red"
-                variant="link">
-                删除
-              </Button>
-            </Popconfirm>
+            {!(2 === adminInfo.data.permission) ? (
+              <Popconfirm
+                title="确定要删除吗？"
+                onConfirm={() => {
+                  deleteAdminAsync(_id);
+                }}
+                cancelText="取消"
+                okText="确定">
+                <Button
+                  disabled={_id === adminInfo.data?._id}
+                  color="red"
+                  variant="link">
+                  删除
+                </Button>
+              </Popconfirm>
+            ) : null}
           </>
         );
       },
